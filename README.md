@@ -7,3 +7,6 @@ Created Lambda Function
 Created DynamoDB table
 
 Tested Lambda Function
+
+
+Created API Gateway
