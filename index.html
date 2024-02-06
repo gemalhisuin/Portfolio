@@ -306,7 +306,9 @@
 
             <div class="portfolio__container bd-grid">
                 <div class="portfolio__content mix ml">
-                    <a href="#"><img src="assets/img/ml_project1.jpg" alt="" class="portfolio__img"></a>
+                    <a href="#"><img
+                            src="assets/img/f0204a44-86a4-4b38-8835-c72eb1bad6bc-ezgif.com-webp-to-jpg-converter.jpg"
+                            alt="" class="portfolio__img"></a>
                     <div class="portfolio__data">
                         <span class="portfolio__subtitle">Machine Learning</span>
                         <a href="#">
@@ -317,7 +319,9 @@
                 </div>
 
                 <div class="portfolio__content mix cv">
-                    <a href="#"><img src="assets/img/cv_project2.jpg" alt="" class="portfolio__img"></a>
+                    <a href="#"><img
+                            src="assets/img/cf53556f-b1ec-4b49-9ff8-b6a45920b7b4-ezgif.com-webp-to-jpg-converter.jpg"
+                            alt="" class="portfolio__img"></a>
                     <div class="portfolio__data">
                         <span class="portfolio__subtitle">Computer Vision</span>
                         <a href="#">
@@ -328,7 +332,9 @@
                 </div>
 
                 <div class="portfolio__content mix nlp">
-                    <a href="#"><img src="assets/img/nlp_project3.jpg" alt="" class="portfolio__img"></a>
+                    <a href="#"><img
+                            src="assets/img/f0204a44-86a4-4b38-8835-c72eb1bad6bc-ezgif.com-webp-to-jpg-converter.jpg"
+                            alt="" class="portfolio__img"></a>
                     <div class="portfolio__data">
                         <span class="portfolio__subtitle">Natural Language Processing</span>
                         <a href="#">
@@ -373,15 +379,16 @@
                         <i class='bx bx-chat contact__icon'></i>
                         <h3 class="contact__title">Chat</h3>
                         <div>
-                            <a href="#" class="contact__social"><i class='bx bxl-whatsapp-square'></i></a>
-                            <a href="#" class="contact__social"><i class='bx bxl-telegram'></i></a>
+                            <a href="https://wa.me/16412339404" class="contact__social" target="_blank"><i class='bx bxl-whatsapp-square'></i></a>
+                            <a href="https://t.me/gemhis" class="contact__social" target="_blank"><i class='bx bxl-telegram'></i></a>
+                            <!-- Messenger link would go here if you have a Messenger URL to link to -->
                             <a href="#" class="contact__social"><i class='bx bxl-messenger'></i></a>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
 
                 <!-- Modify the form's action attribute to point to your Lambda function endpoint -->
-                <form action="https://qlgieo56bd.execute-api.us-east-1.amazonaws.com" method="POST" class="contact__form">
+                <form id="contactForm" class="contact__form">
                     <div class="contact__inputs">
                         <!-- Name and Email input fields with appropriate names -->
                         <input type="text" name="name" placeholder="Name" class="contact__input">
@@ -403,6 +410,56 @@
         </section>
 
     </main>
+
+    <script>
+        // Define the success and error message functions outside of the event listener
+        function displaySuccessMessage(message) {
+            // Implement the logic to display the success message to the user
+            alert(message); // This is a placeholder using alert, but you can customize it
+        }
+
+        function displayErrorMessage(message) {
+            // Implement the logic to display the error message to the user
+            alert(message); // This is a placeholder using alert, but you can customize it
+        }
+
+        // Event listener for the form submission
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Stop the default form submission
+
+            const formData = {
+                name: document.querySelector('[name="name"]').value,
+                email: document.querySelector('[name="email"]').value,
+                project: document.querySelector('[name="project"]').value,
+                phone: document.querySelector('[name="phone"]').value,
+                message: document.querySelector('[name="message"]').value
+            };
+
+            fetch('https://qlgieo56bd.execute-api.us-east-1.amazonaws.com/prod/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    displaySuccessMessage('Message sent successfully!'); // Call the success message function
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    displayErrorMessage('Failed to send message. Please try again later.'); // Call the error message function
+                });
+        });
+    </script>
+
+
 
     <!--===== FOOTER =====-->
     <footer class="footer">
